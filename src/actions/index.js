@@ -1,21 +1,28 @@
 import axios from 'axios';
 
-export const FETCH_BOOKS = 'FETCH_BOOKS';
+export const FETCH_BOOKS_SUCCESS = 'FETCH_BOOKS_SUCCESS';
+export const FETCH_BOOKS_ERROR = 'FETCH_BOOKS_ERROR';
+export const FETCHING_BOOKS = 'FETCHING_BOOKS';
 
+export function fetchBooksSuccess(response) {
+  return {
+    type: FETCH_BOOKS_SUCCESS,
+    payload: response
+  }
+}
 
-// const ROOT_URL = 'https://www.googleapis.com/books/v1/volumes?q='
-const ROOT_URL = 'https://www.googleapis.com/books/v1/volumes'
+export function fetchBooksError(error) {
+  return {
+    type: FETCH_BOOKS_ERROR,
+    payload: error
+  }
+}
 
-
-export function fetchBooks(searchQuery) {
-  // const request = axios.get(`${ROOT_URL}${searchQuery}`);
-  const request = axios.get(`${ROOT_URL}`, {
-    params: {q: `${searchQuery}`}
-  });
+export function fetchingBooks(searchQuery) {
+  const response = axios.get('https://www.googleapis.com/books/v1/volumes', { params: { q: searchQuery } });
 
   return {
-    type: FETCH_BOOKS,
-    payload: request
-  };
-  
+    type: FETCHING_BOOKS,
+    payload: response
+  }
 }

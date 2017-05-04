@@ -1,5 +1,6 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import axios from 'axios';
 import * as actions from '../../actions';
 import { Navbar, Form, FormGroup, FormControl, Button } from 'react-bootstrap';
 
@@ -16,7 +17,13 @@ class SearchBar extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    this.props.fetchBooks(this.state.book);
+    axios.get('https://www.googleapis.com/books/v1/volumes', { params: { q: this.state.book } })
+    .then(response => {
+      this.props.fetchBooksSuccess(response);
+    })
+    .catch(err => {
+      this.props.fetchBooksError(err);
+    })
     this.setState({ book: '' });
   }
 
@@ -25,7 +32,7 @@ class SearchBar extends Component {
       <Navbar>
         <Navbar.Header>
           <Navbar.Brand>
-            <a href="#">Book Search</a>
+            <a href="#">{this.props.books.totalItems ? `${this.props.books.totalItems} Results`: 'No Results' }</a>
           </Navbar.Brand>
           <Navbar.Toggle />
         </Navbar.Header>
@@ -45,7 +52,9 @@ class SearchBar extends Component {
 }
 
 function mapStateToProps(state){
-  return {books: state.books.all}
+  return {
+    books: state.books.all
+  }
 }
 
 

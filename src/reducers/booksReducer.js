@@ -16,6 +16,7 @@ export default function(state = INITIAL_STATE, action) {
         isFetching: false
       };
     case FETCH_BOOKS_ERROR:
+      console.log('error');
       return {
         ...state,
         error: true,

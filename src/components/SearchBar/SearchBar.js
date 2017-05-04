@@ -1,38 +1,39 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
+import _ from 'lodash';
 import * as actions from '../../actions';
-import { Navbar, Form, FormGroup, FormControl, Button } from 'react-bootstrap';
+import { Navbar, Nav, NavItem, Form, FormGroup, FormControl, Button, ControlLabel } from 'react-bootstrap';
 
 
 class SearchBar extends Component {
   constructor(props) {
     super(props);
-    this.state = { book: '' };
+    this.state = { book: '', maxResults: 5 };
   }
 
   handleChange(event) {
     this.setState({ book: event.target.value })
   }
 
+  handleDisplayQuantityChange(event) {
+    this.setState({ maxResults: event.target.value })
+  }
+
   handleSubmit(event) {
     event.preventDefault();
-    axios.get('https://www.googleapis.com/books/v1/volumes', { params: { q: this.state.book } })
-    .then(response => {
-      this.props.fetchBooksSuccess(response);
-    })
-    .catch(err => {
-      this.props.fetchBooksError(err);
-    })
-    this.setState({ book: '' });
+    this.props.fetchBooks(this.state.book, this.state.maxResults);
   }
 
   render(){
+    const books = this.props.books;
+    const displayQuantityOptions = _.range(5, 40, 5).map(quantity => (<option key={quantity} value={quantity}>{quantity}</option>))
+
     return(
       <Navbar>
         <Navbar.Header>
           <Navbar.Brand>
-            <a href="#">{this.props.books.totalItems ? `${this.props.books.totalItems} Results`: 'No Results' }</a>
+            <a href="#">{books.totalItems ? `${books.totalItems} Results`: 'No Results' }</a>
           </Navbar.Brand>
           <Navbar.Toggle />
         </Navbar.Header>
@@ -45,6 +46,19 @@ class SearchBar extends Component {
               </FormGroup>
             </Form>
           </Navbar.Form>
+          {books.totalItems &&
+            <Navbar.Form pullRight>
+              <Form onSubmit={this.handleSubmit.bind(this)}>
+                <FormGroup controlId="formControlsSelect">
+                  <ControlLabel>Display Quantity</ControlLabel>
+                  <FormControl componentClass="select" value={this.state.maxResults} onChange={this.handleDisplayQuantityChange.bind(this)}>
+                    {displayQuantityOptions}
+                  </FormControl>
+                  <Button bsStyle='primary' type="submit">Update</Button>
+                </FormGroup>
+              </Form>
+            </Navbar.Form>
+          }
         </Navbar.Collapse>
       </Navbar>
     )

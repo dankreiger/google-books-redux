@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import axios from 'axios';
 import _ from 'lodash';
 import * as actions from '../../actions';
-import { Navbar, Nav, NavItem, Form, FormGroup, FormControl, Button, ControlLabel } from 'react-bootstrap';
+import { Navbar, Form, FormGroup, FormControl, Button, ControlLabel } from 'react-bootstrap';
 
 
 class SearchBar extends Component {

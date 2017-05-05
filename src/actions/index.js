@@ -1,5 +1,11 @@
 import axios from 'axios';
 
+
+export const FETCH_BOOKS_SUCCESS = 'FETCH_BOOKS_SUCCESS';
+export const FETCH_BOOKS_ERROR = 'FETCH_BOOKS_ERROR';
+export const FETCHING_BOOKS = 'FETCHING_BOOKS';
+
+
 function fetchBooksSuccess(response) {
   return {
     type: FETCH_BOOKS_SUCCESS,
@@ -35,8 +41,3 @@ export function fetchBooks(searchQuery, maxResults) {
     })
   }
 }
-
-
-export const FETCH_BOOKS_SUCCESS = 'FETCH_BOOKS_SUCCESS';
-export const FETCH_BOOKS_ERROR = 'FETCH_BOOKS_ERROR';
-export const FETCHING_BOOKS = 'FETCHING_BOOKS';

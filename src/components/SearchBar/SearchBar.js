@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import _ from 'lodash';
 import * as actions from '../../actions';
 import { Navbar, Form, FormGroup, FormControl, Button, ControlLabel } from 'react-bootstrap';
-
+import './SearchBar.css';
 
 class SearchBar extends Component {
   constructor(props) {
@@ -40,24 +40,16 @@ class SearchBar extends Component {
           <Navbar.Form pullLeft>
             <Form onSubmit={this.handleSubmit.bind(this)}>
               <FormGroup>
-                <FormControl value={this.state.book} onChange={this.handleChange.bind(this)} placeholder="Search" />
+              <FormControl value={this.state.book} onChange={this.handleChange.bind(this)} placeholder="Search" />
+                {!!books.totalItems && !!this.state.book &&
+                  <FormControl componentClass="select" value={this.state.maxResults} onChange={this.handleDisplayQuantityChange.bind(this)}>
+                    {displayQuantityOptions}
+                  </FormControl>
+                }
                 <Button bsStyle='primary' type="submit">Submit</Button>
               </FormGroup>
             </Form>
           </Navbar.Form>
-          {!!books.totalItems &&
-            <Navbar.Form pullRight>
-              <Form onSubmit={this.handleSubmit.bind(this)}>
-                <FormGroup controlId="formControlsSelect">
-                  <ControlLabel>Display Quantity</ControlLabel>
-                  <FormControl componentClass="select" value={this.state.maxResults} onChange={this.handleDisplayQuantityChange.bind(this)}>
-                    {displayQuantityOptions}
-                  </FormControl>
-                  <Button bsStyle='primary' type="submit">Update</Button>
-                </FormGroup>
-              </Form>
-            </Navbar.Form>
-          }
         </Navbar.Collapse>
       </Navbar>
     )

@@ -28,8 +28,6 @@ class BooksShow extends Component {
 
 
   render(){
-    console.log(this.state);
-
     return(
       <Grid>
         <Row>

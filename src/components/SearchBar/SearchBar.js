@@ -45,7 +45,7 @@ class SearchBar extends Component {
               </FormGroup>
             </Form>
           </Navbar.Form>
-          {books.totalItems &&
+          {!!books.totalItems &&
             <Navbar.Form pullRight>
               <Form onSubmit={this.handleSubmit.bind(this)}>
                 <FormGroup controlId="formControlsSelect">

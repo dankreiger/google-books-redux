@@ -1,24 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
+import {Router, browserHistory } from 'react-router';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import reducers from './reducers';
-// import promise from 'redux-promise';
-import App from './App';
-
-// const createStoreWithMiddleware = applyMiddleware(
-//   promise
-// )(createStore);
+import routes from './routes.js';
+import {persistStore, autoRehydrate} from 'redux-persist';
 
 const store = createStore(
   reducers,
-  applyMiddleware(thunk)
+  applyMiddleware(thunk),
+  autoRehydrate()
 );
+persistStore(store)
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <Router history={browserHistory} routes={routes} />
   </Provider>,
   document.getElementById('root')
 );

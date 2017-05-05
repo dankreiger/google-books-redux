@@ -15,7 +15,7 @@ class BookList extends Component {
     if(this.props.isFetching) return (<Spinner />);
 
     const bookDetails = searchResults.map((book, index) => {
-      return (<BookRow key={`result_${index + 1}`} resultNumber={index + 1} info={book.volumeInfo}/>);
+      return (<BookRow key={`result_${index + 1}`} resultNumber={index + 1} book={book}/>);
     });
 
     return(

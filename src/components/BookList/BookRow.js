@@ -1,15 +1,17 @@
 import React from 'react';
+import { browserHistory } from 'react-router';
+import './BookRow.css';
 
 const BookRow = (props) => {
   return (
-    <tr>
-      <td>{props.resultNumber}</td>
-      <td><img src={props.info.imageLinks ? props.info.imageLinks.smallThumbnail : null} alt='bookImage' /></td>
-      <td>{props.info.title}</td>
-      <td>{props.info.description}</td>
-      <td>{props.info.authors ? props.info.authors.join(', ') : null}</td>
-      <td>{props.info.publishedDate}</td>
-    </tr>
+      <tr className='bookRow' onClick={() => browserHistory.push(`/${props.resultNumber}`)}>
+        <td>{props.resultNumber}</td>
+        <td><img src={props.book.volumeInfo.imageLinks ? props.book.volumeInfo.imageLinks.smallThumbnail : null} alt='bookImage' /></td>
+        <td>{props.book.volumeInfo.title}</td>
+        <td>{props.book.volumeInfo.description}</td>
+        <td>{props.book.volumeInfo.authors ? props.book.volumeInfo.authors.join(', ') : null}</td>
+        <td>{props.book.volumeInfo.publishedDate}</td>
+      </tr>
   )
 }
 

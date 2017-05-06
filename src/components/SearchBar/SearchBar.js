@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import * as actions from '../../actions';
-import { Navbar, Form, FormGroup, FormControl, Button, ControlLabel } from 'react-bootstrap';
+import { Navbar, Nav, Form, FormGroup, FormControl, Button } from 'react-bootstrap';
+import BooksPagination from '../BooksPagination/BooksPagination';
 import './SearchBar.css';
 
 class SearchBar extends Component {
@@ -19,9 +20,17 @@ class SearchBar extends Component {
     this.setState({ maxResults: event.target.value })
   }
 
+  componentDidUpdate(prevProps, prevState){
+    if(this.state.maxResults !== prevState.maxResults){
+      this.handleSubmit(event);
+    }
+  }
+
   handleSubmit(event) {
     event.preventDefault();
-    this.props.fetchBooks(this.state.book, this.state.maxResults);
+    if(!!this.state.book){
+      this.props.fetchBooks(this.state.book, this.state.maxResults);
+    }
   }
 
   render(){
@@ -50,6 +59,11 @@ class SearchBar extends Component {
               </FormGroup>
             </Form>
           </Navbar.Form>
+          {this.props.books &&
+            <Nav pullRight>
+              <BooksPagination searchQuery={this.state.book} resultsPerPage={this.state.maxResults} startIndex={this.state.maxResults}/>
+            </Nav>
+          }
         </Navbar.Collapse>
       </Navbar>
     )

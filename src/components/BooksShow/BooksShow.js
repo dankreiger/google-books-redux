@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 import { Grid, Row, Table, Col } from 'react-bootstrap';
-import { fetchingBook } from '../../actions/index';
 import BookRow from '../BookList/BookRow';
 
 
@@ -34,7 +33,6 @@ class BooksShow extends Component {
           <Table>
             <thead>
               <tr>
-                <th></th>
                 <th>Image</th>
                 <th>Title</th>
                 <th>Description</th>
@@ -44,7 +42,7 @@ class BooksShow extends Component {
             </thead>
             <tbody>
               {!!this.state.bookItem &&
-              <BookRow resultNumber={''} book={this.state.bookItem} bookShow={true}/>}
+              <BookRow book={this.state.bookItem} bookShow={true}/>}
             </tbody>
           </Table>
         </Row>

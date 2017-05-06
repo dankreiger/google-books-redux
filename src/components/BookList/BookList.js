@@ -24,7 +24,6 @@ class BookList extends Component {
           <Table striped bordered condensed hover>
             <thead>
               <tr>
-                <th>#</th>
                 <th>Image</th>
                 <th>Title</th>
                 <th>Description</th>

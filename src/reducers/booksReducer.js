@@ -25,7 +25,10 @@ export default function(state = INITIAL_STATE, action) {
     case FETCHING_BOOKS:
       return {
         ...state,
-        isFetching: true
+        isFetching: true,
+        lastSearchQuery: action.payload.lastSearchQuery,
+        maxResults: action.payload.maxResults,
+        startIndex: action.payload.startIndex
       }
     default:
       return state;

@@ -20,18 +20,23 @@ function fetchBooksError(error) {
   }
 }
 
-function fetchingBooks() {
+function fetchingBooks(lastSearchQuery, maxResults, startIndex) {
   return {
-    type: FETCHING_BOOKS
+    type: FETCHING_BOOKS,
+    payload: {
+      searchQuery: lastSearchQuery,
+      maxResults: maxResults,
+      startIndex: startIndex
+    }
   }
 }
 
-export function fetchBooks(searchQuery, maxResults) {
+export function fetchBooks(lastSearchQuery, maxResults, startIndex) {
   return function (dispatch) {
-    dispatch(fetchingBooks());
+    dispatch(fetchingBooks(lastSearchQuery, maxResults, startIndex));
     axios.get('https://www.googleapis.com/books/v1/volumes', {
       params:
-        { q: searchQuery, maxResults: maxResults }
+        { q: lastSearchQuery, maxResults: maxResults, startIndex: startIndex }
     })
     .then(response => {
       dispatch(fetchBooksSuccess(response));

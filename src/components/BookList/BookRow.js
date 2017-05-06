@@ -5,7 +5,6 @@ import './BookRow.css';
 const BookRow = (props) => {
   return (
       <tr className='bookRow' onClick={() => browserHistory.push(`/${props.resultNumber}`)}>
-        <td>{props.resultNumber}</td>
         <td><img src={props.book.volumeInfo.imageLinks ? props.book.volumeInfo.imageLinks.smallThumbnail : null} alt='bookImage' /></td>
         <td>{props.book.volumeInfo.title}</td>
         <td>{props.book.volumeInfo.description}</td>

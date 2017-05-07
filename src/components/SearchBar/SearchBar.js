@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import * as actions from '../../actions';
-import { Navbar, Nav, Form, FormGroup, FormControl, Button } from 'react-bootstrap';
-import BooksPagination from '../BooksPagination/BooksPagination';
+import { Navbar, Form, FormGroup, FormControl, Button } from 'react-bootstrap';
+// import BooksPagination from '../BooksPagination/BooksPagination';
 import './SearchBar.css';
 
 class SearchBar extends Component {

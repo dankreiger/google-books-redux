@@ -59,11 +59,11 @@ class SearchBar extends Component {
               </FormGroup>
             </Form>
           </Navbar.Form>
-          {this.props.books &&
+          {/* {this.props.books &&
             <Nav pullRight>
               <BooksPagination searchQuery={this.state.book} resultsPerPage={this.state.maxResults} startIndex={this.state.maxResults}/>
             </Nav>
-          }
+          } */}
         </Navbar.Collapse>
       </Navbar>
     )
